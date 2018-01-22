@@ -5,14 +5,15 @@ import {PageNotFoundComponent} from "./core/page-not-found/page-not-found.compon
 import {EventComponent} from "./event/event.component";
 import {TicketComponent} from "./ticket/ticket.component";
 import {AboutComponent} from "./about/about.component";
-import {LoginComponent} from "./profile/login/login.component";
-import {RegistrationComponent} from "./profile/registration/registration.component";
+import {LoginComponent} from "./user/login/login.component";
+import {RegistrationComponent} from "./user/registration/registration.component";
 import {EventListComponent} from "./event/event-list/event-list.component";
 import {EventDetailComponent} from "./event/event-detail/event-detail.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {ProfileEditComponent} from "./profile/profile-edit/profile-edit.component";
+import {ProfileComponent} from "./user/profile/profile.component";
+import {ProfileEditComponent} from "./user/profile-edit/profile-edit.component";
 import {TicketListComponent} from "./ticket/ticket-list/ticket-list.component";
 import {TicketDetailComponent} from "./ticket/ticket-detail/ticket-detail.component";
+import {BidComponent} from "./ticket/bid/bid.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -40,7 +41,7 @@ const routes: Routes = [
     children: [
       {path: 'list', component: TicketListComponent},
       {path: 'new', component: TicketDetailComponent},
-      {path: ':id/bid', component: TicketDetailComponent}
+      {path: ':id/bid', component: BidComponent}
     ]
   },
   {path: 'about', component: AboutComponent},
@@ -61,6 +62,7 @@ export class AppRoutingModule {
     TicketComponent,
     TicketListComponent,
     TicketDetailComponent,
+    BidComponent,
     AboutComponent,
     LoginComponent,
     RegistrationComponent,
