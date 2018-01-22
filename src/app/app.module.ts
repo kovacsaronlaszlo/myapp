@@ -9,6 +9,7 @@ import { JumbotronComponent } from './core/jumbotron/jumbotron.component';
 import { EventcardComponent } from './event/eventcard/eventcard.component';
 import { FooterComponent } from './core/footer/footer.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {EventService} from "./shared/event.service";
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import {AppRoutingModule} from "./app-routing.module";
     CollapseModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    EventService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
