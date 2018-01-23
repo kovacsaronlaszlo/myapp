@@ -7,9 +7,10 @@ export class UserModel {
   gender: string;
 
   constructor(param?: UserModel) {
-    if(param)
+    if (param)
       Object.assign(this, param);
   }
+
 
   static get exampleUser(): UserModel {
     return {
@@ -20,5 +21,16 @@ export class UserModel {
       dateOfBirth: '1988.01.05',
       gender: 'male'
     };
+  }
+
+  static get emptyUser(): UserModel {
+    return {
+      id: 0,
+      name: '',
+      email: '',
+      address: '',
+      dateOfBirth: '',
+      gender: ''
+    }
   }
 }

@@ -9,4 +9,14 @@ export class EventModel {
     if (param)
       Object.assign(this, param);
   }
+
+  static get emptyEvent() {
+    return {
+      'id': 0,
+      'name': '',
+      'date': '',
+      'pictureURL': '',
+      'description': ''
+    };
+  }
 }
