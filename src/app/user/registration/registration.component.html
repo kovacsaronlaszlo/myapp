@@ -70,7 +70,11 @@
               <label for="registerPassword2">Jelszó ismét</label>
               <input name="registerPassword2" required type="password" class="form-control" id="registerPassword2" placeholder="jelszó ismét">
             </div>
-            <button type="submit" class="btn btn-primary" routerLink="/user">regisztráció</button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    (click)="register()">
+              regisztráció
+            </button>
           </form>
         </div>
       </div>
