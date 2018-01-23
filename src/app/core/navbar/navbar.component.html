@@ -13,14 +13,16 @@
         <a class="nav-item nav-link" routerLinkActive="active" routerLink="/event/list">Események</a>
         <a class="nav-item nav-link" routerLinkActive="active" routerLink="/ticket/list">Jegyek</a>
         <a class="nav-item nav-link" routerLinkActive="active" routerLink="/about">Rólunk</a>
-        <ng-container *ngIf="!userService.isLoggedin">
+        <ng-container *ngIf="!userService.isLoggedin; else loggedInBlock">
           <a class="nav-item nav-link" routerLinkActive="active" routerLink="/user/login">Belépés</a>
           <a routerLink="/user/registration"
              class="nav-item nav-link btn btn-primary text-light ml-lg-2 btn-sm">
             Regisztráció
           </a>
         </ng-container>
-        <a class="nav-item nav-link" routerLinkActive="active" (click)="logout()">Kilépés</a>
+        <ng-template #loggedInBlock>
+          <a class="nav-item nav-link" routerLinkActive="active" (click)="logout()">Kilépés</a>
+        </ng-template>
       </div>
     </div>
   </div>
