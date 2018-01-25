@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EventModel} from "../../shared/event-model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EventService} from "../../shared/event.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-event-detail',
@@ -13,7 +14,7 @@ export class EventDetailComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _eventService: EventService,
-              private _router: Router) { }
+              private _location: Location) { }
 
   ngOnInit() {
     const evId = +this._route.snapshot.params['id'];
@@ -36,7 +37,7 @@ export class EventDetailComponent implements OnInit {
       console.log('create branch');
       this._eventService.create(this.event);
     }
-    this._router.navigate(['/event/list']);
+    this._location.back();
   }
 
 }
