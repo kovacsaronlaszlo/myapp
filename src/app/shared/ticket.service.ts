@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { EventService } from './event.service';
-import { TicketModel } from './ticket-model';
-import { UserService } from './user.service';
+import {Injectable} from '@angular/core';
+import {EventService} from './event.service';
+import {TicketModel} from './ticket-model';
+import {UserService} from './user.service';
 
 @Injectable()
 export class TicketService {
@@ -25,11 +25,18 @@ export class TicketService {
   create(param: TicketModel) {
     this._tickets = [
       ...this._tickets,
-      {
-        id: this._tickets.reduce((x,y) => x.id > y.id ? x : y).id + 1,
-        ...param
-      }
+      new TicketModel({
+        id: this._tickets.reduce((x, y) => x.id > y.id ? x : y).id + 1,
+        ...param,
+        event: this._eventService.getEventById(param.eventId),
+        seller: this._userService.getUserById(param.sellerUserId)
+      })
     ];
+    console.log(this._tickets);
+  }
+
+  getEventNameById(id: number) {
+    return this._eventService.getEventById(id).name;
   }
 
   private _getMockData() {
@@ -89,9 +96,5 @@ export class TicketService {
         'sellerUserId': 3
       })
     ]
-  }
-
-  getEventNameById(id: number) {
-    return this._eventService.getEventById(id).name;
   }
 }

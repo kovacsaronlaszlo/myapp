@@ -42,7 +42,7 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    const user = this._allUsers.filter(u => u.id === id);
+    const user = this._allUsers.filter(u => u.id === +id);
     return user.length > 0 ? user[0] : new UserModel(UserModel.emptyUser);
   }
 
@@ -52,6 +52,14 @@ export class UserService {
 
   private _getMockData() {
     return [
+      new UserModel({
+        'id': 0,
+        'name': 'Kovács Áron László',
+        'email': 'k.aron.laszlo@gmail.com',
+        'address': 'Hadak útja',
+        'dateOfBirth': '1988-01-05',
+        'gender': 'male'
+      }),
       new UserModel({
         'id': 1,
         'name': 'Pista ba',
