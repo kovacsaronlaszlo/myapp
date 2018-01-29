@@ -15,22 +15,28 @@ export class UserService {
 
   login(email: string, password: string): boolean {
     if (email === 'angular' && password === 'angular') {
-      this._user = new UserModel(UserModel.exampleUser);
+      this._user = this._allUsers[2];
       this.isLoggedin = true;
       console.log('Be vagyok lépve? => ', this.isLoggedin);
-      this._router.navigate(['/user']);
+      return true;
     }
     return false;
   }
 
   register(param?: UserModel) {
-    if (param)
-      this._user = new UserModel(param);
-    else
-      this._user = new UserModel(UserModel.exampleUser);
+    if (param) {
+      this._user = new UserModel({
+        id: 4,
+        ...param
+      });
+
+      this._allUsers = [
+        ...this._allUsers,
+        this._user
+      ]
+    }
     this.isLoggedin = true;
     console.log('Be vagyok lépve? => ', this.isLoggedin);
-    this._router.navigate(['/user']);
   }
 
   logout() {

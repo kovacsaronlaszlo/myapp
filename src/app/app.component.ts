@@ -9,8 +9,4 @@ import {UserService} from "./shared/user.service";
 export class AppComponent {
   title = 'app';
 
-  // az automatikus belépéshez
-  constructor(private _userService: UserService) {
-    this._userService.login('angular', 'angular');
-  }
 }
