@@ -4,12 +4,9 @@ import {UserModel} from './user-model';
 export class TicketModel {
   id?: number;
   date: string;
-  artist: string;
   numberOfTickets: number;
   minimalBidPrice: number;
   bidStep: number;
-  bidStartDate: string;
-  bidEndDate: string;
   eventId: number;
   event?: EventModel;
   sellerUserId: number;
