@@ -22,11 +22,11 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {
     const evId = +this._route.snapshot.params['id'];
     if (evId) {
-      this.event = this._eventService.getEventById(evId);
+      // this.event = this._eventService.getEventById(evId);
       console.log('esemény id ', evId);
       console.log('esemény ', this.event);
     } else {
-      this.event = new EventModel(EventModel.emptyEvent);
+      // this.event = new EventModel(EventModel.emptyEvent);
       this.editForm = true;
       console.log('nem kaptunk semmit... lol');
     }
