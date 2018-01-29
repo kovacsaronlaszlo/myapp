@@ -41,8 +41,12 @@ export class UserService {
     this._router.navigate(['/home']);
   }
 
+  updateUser(param: UserModel) {
+    this._user = new UserModel(param);
+  }
+
   getUserById(id: number) {
-    const user = this._allUsers.filter(u => u.id === +id);
+    const user = this._allUsers.filter(u => u.id === id);
     return user.length > 0 ? user[0] : new UserModel(UserModel.emptyUser);
   }
 
@@ -58,7 +62,8 @@ export class UserService {
         'email': 'k.aron.laszlo@gmail.com',
         'address': 'Hadak útja',
         'dateOfBirth': '1988-01-05',
-        'gender': 'male'
+        'gender': 'male',
+        'profilePictureUrl': 'https://i0.wp.com/www.dargaud.com/data/img/avatars/weekly.jpg'
       }),
       new UserModel({
         'id': 1,
@@ -66,7 +71,8 @@ export class UserService {
         'email': 'pistaba@pistaba.com',
         'address': 'pistaba lak 12',
         'dateOfBirth': '1900-01-01',
-        'gender': 'male'
+        'gender': 'male',
+        'profilePictureUrl': 'https://i.ytimg.com/vi/QjM6xbJglPY/maxresdefault.jpg'
       }),
       new UserModel({
         'id': 2,
@@ -74,7 +80,8 @@ export class UserService {
         'email': 'marcsa@marcsa.hu',
         'address': 'marcsa var 42.',
         'dateOfBirth': '2000-01-01',
-        'gender': 'female'
+        'gender': 'female',
+        'profilePictureUrl': 'https://cdn.thisiswhyimbroke.com/images/jessica-rabbit-dress1-300x250.jpg'
       }),
       new UserModel({
         'id': 3,
@@ -82,7 +89,8 @@ export class UserService {
         'email': 'mzx@mzx.hu',
         'address': 'namek',
         'dateOfBirth': '2199-02-01',
-        'gender': 'satan fattya'
+        'gender': 'satan fattya',
+        'profilePictureUrl': 'https://vignette.wikia.nocookie.net/uglyamericans/images/f/f0/Aldermach_Maggotbone_Evil.jpg/revision/latest?cb=20150212182907'
       })
     ]
   }

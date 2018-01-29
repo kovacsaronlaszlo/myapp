@@ -5,6 +5,7 @@ export class UserModel {
   address: string;
   dateOfBirth: string;
   gender: string;
+  profilePictureUrl: string;
 
   constructor(param?: UserModel) {
     if (param)
@@ -19,7 +20,8 @@ export class UserModel {
       email: 'k.aron.laszlo@gmail.com',
       address: 'Hadak útja',
       dateOfBirth: '1988.01.05',
-      gender: 'male'
+      gender: 'male',
+      profilePictureUrl: 'http://ouaibelephant.free.fr/Blacksad/smirnov.jpg'
     };
   }
 
@@ -30,7 +32,8 @@ export class UserModel {
       email: '',
       address: '',
       dateOfBirth: '',
-      gender: ''
+      gender: '',
+      profilePictureUrl: ''
     }
   }
 }
