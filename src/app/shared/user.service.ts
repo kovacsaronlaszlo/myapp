@@ -1,6 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserModel} from "./user-model";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {FirebaseLoginModel} from "./firebase-login-model";
+import {environment} from "../../environments/environment";
+import "rxjs/add/operator/switchMap";
+import "rxjs/add/operator/do";
 
 @Injectable()
 export class UserService {
@@ -9,18 +15,22 @@ export class UserService {
   private _user: UserModel;
   private _allUsers: UserModel[];
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              private _http: HttpClient) {
     this._allUsers = this._getMockData();
   }
 
-  login(email: string, password: string): boolean {
-    if (email === 'angular' && password === 'angular') {
-      this._user = this._allUsers[2];
-      this.isLoggedin = true;
-      console.log('Be vagyok lépve? => ', this.isLoggedin);
-      return true;
-    }
-    return false;
+  login(email: string, password: string): Observable<UserModel | void> {
+    return this._http.post<FirebaseLoginModel>(
+      `${environment.firebase.loginUrl}?key=${environment.firebase.apikey}`,
+      {
+        'email': email,
+        'password': password,
+        'returnSecureToken': true
+      })
+      .switchMap(fbLogin => this._http.get<UserModel>(`${environment.firebase.baseUrl}/users/${fbLogin.localId}.json`))
+      .do(user => this.isLoggedin = true)
+      .do(user => this._user = user);
   }
 
   register(param?: UserModel) {
@@ -57,7 +67,7 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return this._user;
+    return this._user ? this._user : new UserModel(UserModel.emptyUser);
   }
 
   private _getMockData() {
