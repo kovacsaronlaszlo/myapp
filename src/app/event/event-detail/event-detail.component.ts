@@ -5,6 +5,7 @@ import {EventService} from "../../shared/event.service";
 import {Location} from "@angular/common";
 import {UserService} from "../../shared/user.service";
 import {Subject} from "rxjs/Subject";
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-event-detail',
@@ -24,7 +25,7 @@ export class EventDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const evId = this._route.snapshot.params['id'];
-    this.event = new EventModel(EventModel.emptyEvent);
+    this.event = new EventModel();
     this.viewForm = !!evId;
     if (evId) {
       this._eventService.getEventById(evId)
@@ -39,7 +40,7 @@ export class EventDetailComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  onSubmit(form) {
+  onSubmit() {
     this._eventService.save(this.event)
       .takeUntil(this._destroy$)
       .subscribe(

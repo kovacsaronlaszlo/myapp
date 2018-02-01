@@ -21,9 +21,8 @@ export class TicketDetailComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
-    this.ticket = new TicketModel(TicketModel.emptyTicket);
-    this.ticket.sellerUserId = this._userService.getCurrentUser().id;
-    // this.events = this._eventService.getAllEvents();
+    this.ticket = new TicketModel();
+    // this.ticket.sellerUserId = this._userService.getCurrentUser().id;
   }
 
   onSubmit() {

@@ -16,7 +16,7 @@ export class EventService {
       .map(data => Object.values(data).map(evm => new EventModel(evm)));
   }
 
-  getEventById(id: number) {
+  getEventById(id: string) {
     return this._http.get<EventModel>(`${environment.firebase.baseUrl}/events/${id}.json`);
   }
   save(param: EventModel) {
@@ -27,7 +27,7 @@ export class EventService {
       return this._http.post(`${environment.firebase.baseUrl}/events.json`, param);
   }
 
-  delete() {
+  delete(param: EventModel) {
     return this._http.delete(`${environment.firebase.baseUrl}/events/${param.id}.json`);
   }
 

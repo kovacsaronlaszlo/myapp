@@ -1,5 +1,5 @@
 export class UserModel {
-  id: number;
+  id: string;
   name: string;
   email: string;
   address: string;
@@ -10,30 +10,5 @@ export class UserModel {
   constructor(param?: UserModel) {
     if (param)
       Object.assign(this, param);
-  }
-
-
-  static get exampleUser(): UserModel {
-    return {
-      id: 0,
-      name: 'Kovács Áron László',
-      email: 'k.aron.laszlo@gmail.com',
-      address: 'Hadak útja',
-      dateOfBirth: '1988.01.05',
-      gender: 'male',
-      profilePictureUrl: 'http://ouaibelephant.free.fr/Blacksad/smirnov.jpg'
-    };
-  }
-
-  static get emptyUser(): UserModel {
-    return {
-      id: 0,
-      name: '',
-      email: '',
-      address: '',
-      dateOfBirth: '',
-      gender: '',
-      profilePictureUrl: ''
-    }
   }
 }
