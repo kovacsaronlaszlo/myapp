@@ -8,7 +8,7 @@ import {Subscription} from "rxjs/Subscription";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
   user: UserModel;
 
   private _subs: Subscription;
@@ -16,11 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
-    this._subs = this._userService.getCurrentUser().subscribe(user => this.user = user);
-  }
-
-  ngOnDestroy() {
-    this._subs.unsubscribe();
+    this.user = this._userService.getCurrentUser();
   }
 
 }

@@ -67,7 +67,7 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return Observable.of(this._user);
+    return this._user;
   }
 
   logout() {
