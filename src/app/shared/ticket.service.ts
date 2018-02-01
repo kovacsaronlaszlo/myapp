@@ -11,6 +11,7 @@ import {UserModel} from "./user-model";
 import {EventModel} from "./event-model";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/observable/forkJoin";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class TicketService {

@@ -32,7 +32,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._subs.unsubscribe();
+    if(this._subs != null && !this._subs.closed) {
+      this._subs.unsubscribe();
+    }
   }
 
   onSubmit() {

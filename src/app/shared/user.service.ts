@@ -21,6 +21,10 @@ export class UserService {
               private _http: HttpClient) {
   }
 
+  get fbIdToken(): string | null {
+    return this._fbAuthData ? this._fbAuthData.idToken : null;
+  }
+
   login(email: string, password: string): Observable<UserModel | void> {
     return this._http.post<FirebaseLoginModel>(
       `${environment.firebase.loginUrl}?key=${environment.firebase.apikey}`,
