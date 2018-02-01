@@ -40,7 +40,11 @@ export class TicketService {
   }
 
   create(param: TicketModel) {
-    return this._http.post(`${environment.firebase.baseUrl}/tickets.json`, param);
+    return this._http.post(`${environment.firebase.baseUrl}/tickets.json`, param)
+      .switchMap((fbPostReturn: {name: string}) => this._http.patch(
+        `${environment.firebase.baseUrl}/tickets/${fbPostReturn.name}.json`,
+        {id: fbPostReturn.name}
+      ));
   }
 
   getEventNameById(id: number) {
