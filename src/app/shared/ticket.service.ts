@@ -40,11 +40,19 @@ export class TicketService {
   }
 
   create(param: TicketModel) {
-    return this._http.post(`${environment.firebase.baseUrl}/tickets.json`, param)
-      .switchMap((fbPostReturn: {name: string}) => this._http.patch(
-        `${environment.firebase.baseUrl}/tickets/${fbPostReturn.name}.json`,
-        {id: fbPostReturn.name}
-      ));
+    return this._http
+      .post<{name: string}>(`${environment.firebase.baseUrl}/tickets.json`, param)
+      .map(fbPostReturn => fbPostReturn.name)
+      .switchMap(ticketId => this._saveGeneratedId(ticketId))
+      .switchMap(ticketId => this._eventService.addTicket(param.eventId, ticketId))
+      .switchMap(ticketId => this._userService.addTicket(ticketId));
+  }
+
+  private _saveGeneratedId(ticketId: string): Observable<string> {
+    return this._http.patch<{id: string}>(
+      `${environment.firebase.baseUrl}/tickets/${ticketId}.json`,
+      {id: ticketId}
+    ).map(x => x.id);
   }
 
   getEventNameById(id: number) {

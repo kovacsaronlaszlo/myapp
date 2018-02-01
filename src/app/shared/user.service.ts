@@ -78,6 +78,13 @@ export class UserService {
     console.log('a user kilépet');
   }
 
+  addTicket(ticketId: string): Observable<string> {
+    return this._http.patch(
+      `${environment.firebase.baseUrl}/users/${this._user.id}/tickets.json`,
+      {[ticketId]: true}
+    ).map(rel => Object.keys(rel)[0]);
+  }
+
   getAllUsers() {
     return this._http.get(`${environment.firebase.baseUrl}/users.json`)
       .map(usersObject => Object.values(usersObject).map(user => new UserModel(user)));
