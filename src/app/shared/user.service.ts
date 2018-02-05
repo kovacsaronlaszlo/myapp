@@ -37,7 +37,7 @@ export class UserService {
       .switchMap(fbLogin => this.getUserById(fbLogin.localId))
       .do(user => this._user = user)
       .do(user => this.isLoggedin = true)
-      .do(user => console.log(`Sikerült a belépés ezzel a userrel: ${user}`));
+      .do(user => console.log('Sikerült a belépés ezzel a userrel: ', user));
   }
 
   register(param: UserModel, password: string) {
@@ -58,7 +58,7 @@ export class UserService {
       })
       .switchMap(user => this.save(user))
       .do(user => this.isLoggedin = true)
-      .do(user => console.log(`sikeresen regisztrált ez a user: ${user}`));
+      .do(user => console.log('sikeresen regisztrált ez a user: ', user));
   }
 
   save(param: UserModel) {

@@ -13,7 +13,7 @@
     </div>
     <!--card-body-->
     <div class="card-body">
-      <form #eventForm="ngForm" (submit)="onSubmit()">
+      <form #eventForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="esemeny">Esemény címe:</label>
           <input type="text"
@@ -67,7 +67,7 @@
                     id="leiras"
                     required
                     [disabled]="viewForm"
-                   [(ngModel)]="event.description" name="desc"
+                   [(ngModel)]="event.description" name="description"
                     #description="ngModel">
           </textarea>
           <alert type="danger" *ngIf="description.touched && description.invalid">
@@ -75,7 +75,7 @@
           </alert>
         </div>
         <div class="text-center mb-3">
-          <ng-container *ngIf="userService.isLoggedIn">
+          <ng-container *ngIf="userService.isLoggedin">
             <ng-container *ngIf="viewForm; else editButtons">
               <button class="btn btn-primary btn-lg"
                       type="submit"
@@ -83,19 +83,19 @@
                 Szerkesztés
               </button>
             </ng-container>
-            <ng-container #editButtons>
+            <ng-template #editButtons>
               <button class="btn btn-primary btn-lg"
                       type="submit"
                       [disabled]="eventForm.invalid">
                 Mentés
               </button>
-              <button class="btn btn-primary btn-lg"
+              <button class="btn btn-danger btn-lg"
                       type="button"
                       (click)="delete()"
                       *ngIf="event.id">
                 Törlés
               </button>
-            </ng-container>
+            </ng-template>
           </ng-container>
           <button class="btn btn-primary btn-lg"
                   type="button"

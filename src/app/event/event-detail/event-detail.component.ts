@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EventModel} from "../../shared/event-model";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../shared/event.service";
 import {Location} from "@angular/common";
 import {UserService} from "../../shared/user.service";
@@ -21,7 +21,8 @@ export class EventDetailComponent implements OnInit, OnDestroy {
   constructor(private _route: ActivatedRoute,
               private _eventService: EventService,
               private _location: Location,
-              public userService: UserService) { }
+              public userService: UserService) {
+  }
 
   ngOnInit() {
     const evId = this._route.snapshot.params['id'];
