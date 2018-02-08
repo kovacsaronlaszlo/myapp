@@ -10,8 +10,10 @@ import "rxjs/add/observable/of";
 import {UserModel} from "./user-model";
 import {EventModel} from "./event-model";
 import "rxjs/add/operator/switchMap";
+import "rxjs/add/observable/combineLatest";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/mergeMap";
 
 @Injectable()
 export class TicketService {
@@ -25,38 +27,54 @@ export class TicketService {
     return this._http.get(`${environment.firebase.baseUrl}/tickets.json`)
       .map(ticketsObject => Object.values(ticketsObject))
       .map(ticketsArray => ticketsArray.map(tm =>
-      Observable.zip(
-        Observable.of(tm),
-        this._eventService.getEventById(tm.eventId),
-        this._userService.getUserById(tm.sellerUserId),
-        (t: TicketModel, e: EventModel, u: UserModel) => {
-          return {
-            ...t,
-            event: e,
-            seller: u
-          };
-        })
+        Observable.zip(
+          Observable.of(tm),
+          this._eventService.getEventById(tm.eventId),
+          this._userService.getUserById(tm.sellerUserId),
+          (t: TicketModel, e: EventModel, u: UserModel) => {
+            return {
+              ...t,
+              event: e,
+              seller: u
+            };
+          })
       ))
       .switchMap(zipStreamArray => Observable.forkJoin(zipStreamArray));
   }
 
   create(param: TicketModel) {
     return this._http
-      .post<{name: string}>(`${environment.firebase.baseUrl}/tickets.json`, param)
+      .post<{ name: string }>(`${environment.firebase.baseUrl}/tickets.json`, param)
       .map(fbPostReturn => fbPostReturn.name)
       .switchMap(ticketId => this._saveGeneratedId(ticketId))
       .switchMap(ticketId => this._eventService.addTicket(param.eventId, ticketId))
       .switchMap(ticketId => this._userService.addTicket(ticketId));
   }
 
+  getOne(id: string): Observable<TicketModel> {
+    return this._http.get<TicketModel>(`${environment.firebase.baseUrl}/tickets/${id}.json`)
+    // flatMap-nél új stream-et adunk vissza
+      .flatMap(
+        ticket => Observable.combineLatest(
+          // itt fogjuk új streambe csomagolni
+          Observable.of(new TicketModel(ticket)),
+          this._eventService.getEventById(ticket.eventId),
+          this._userService.getUserById(ticket.sellerUserId),
+          (t: TicketModel, e: EventModel, u: UserModel) => {
+            return {
+              ...t,
+              event: e,
+              seller: u
+            };
+          }
+        )
+      );
+  }
+
   private _saveGeneratedId(ticketId: string): Observable<string> {
-    return this._http.patch<{id: string}>(
+    return this._http.patch<{ id: string }>(
       `${environment.firebase.baseUrl}/tickets/${ticketId}.json`,
       {id: ticketId}
     ).map(x => x.id);
-  }
-
-  getEventNameById(id: number) {
-    // return this._eventService.getEventById(id).name;
   }
 }
