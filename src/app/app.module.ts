@@ -16,6 +16,7 @@ import {LoggedInGuard} from "./shared/logged-in.guard";
 import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth-interceptor";
+import { TicketDetailscardComponent } from './ticket/ticket-detailscard/ticket-detailscard.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {AuthInterceptor} from "./shared/auth-interceptor";
     JumbotronComponent,
     EventcardComponent,
     FooterComponent,
-    ...AppRoutingModule.routableComponents
+    ...AppRoutingModule.routableComponents,
+    TicketDetailscardComponent
   ],
   imports: [
     BrowserModule,
