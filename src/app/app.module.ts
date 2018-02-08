@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth-interceptor";
 import { TicketDetailscardComponent } from './ticket/ticket-detailscard/ticket-detailscard.component';
+import { BiddingCardComponent } from './ticket/bidding-card/bidding-card.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TicketDetailscardComponent } from './ticket/ticket-detailscard/ticket-d
     EventcardComponent,
     FooterComponent,
     ...AppRoutingModule.routableComponents,
-    TicketDetailscardComponent
+    TicketDetailscardComponent,
+    BiddingCardComponent
   ],
   imports: [
     BrowserModule,
