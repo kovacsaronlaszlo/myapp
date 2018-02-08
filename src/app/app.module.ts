@@ -16,8 +16,9 @@ import {LoggedInGuard} from "./shared/logged-in.guard";
 import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth-interceptor";
-import { TicketDetailscardComponent } from './ticket/ticket-detailscard/ticket-detailscard.component';
-import { BiddingCardComponent } from './ticket/bidding-card/bidding-card.component';
+import {TicketDetailscardComponent} from './ticket/ticket-detailscard/ticket-detailscard.component';
+import {BiddingCardComponent} from './ticket/bidding-card/bidding-card.component';
+import {MomentModule} from "angular2-moment";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { BiddingCardComponent } from './ticket/bidding-card/bidding-card.compone
     CollapseModule.forRoot(),
     AlertModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   providers: [
     EventService,
