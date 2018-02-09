@@ -20,6 +20,7 @@ import {TicketDetailscardComponent} from './ticket/ticket-detailscard/ticket-det
 import {BiddingCardComponent} from './ticket/bidding-card/bidding-card.component';
 import {MomentModule} from "angular2-moment";
 import 'moment/locale/hu';
+import { BidFormComponent } from './ticket/bid-form/bid-form.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import 'moment/locale/hu';
     FooterComponent,
     ...AppRoutingModule.routableComponents,
     TicketDetailscardComponent,
-    BiddingCardComponent
+    BiddingCardComponent,
+    BidFormComponent
   ],
   imports: [
     BrowserModule,
