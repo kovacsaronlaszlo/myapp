@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TicketService} from "../../shared/ticket.service";
 import {TicketModel} from "../../shared/ticket-model";
+import {UserService} from "../../shared/user.service";
 
 @Component({
   selector: 'app-bid',
@@ -9,8 +10,12 @@ import {TicketModel} from "../../shared/ticket-model";
 })
 export class BidComponent implements OnInit {
   ticket: TicketModel;
+  isLoggedIn: boolean;
 
-  constructor(private ticketService: TicketService) {
+  constructor(
+    private ticketService: TicketService,
+    private userService: UserService) {
+      this.isLoggedIn = this.userService.isLoggedin;
   }
 
   ngOnInit() {

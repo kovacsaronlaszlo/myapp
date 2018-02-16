@@ -7,7 +7,8 @@ import {TicketModel} from "../../shared/ticket-model";
   styleUrls: ['./bidding-card.component.css']
 })
 export class BiddingCardComponent {
-  @Input() ticket: TicketModel
+  @Input() ticket: TicketModel;
+  @Input() isLoggedIn: Boolean;
 
   onBidWithBidStep() {
     alert('asdf');
