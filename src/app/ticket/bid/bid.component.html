@@ -1,15 +1,18 @@
-<div class="row">
-  <ng-container *ngIf="ticket">
-    <div class="col-sm order-md-2">
-      <app-eventcard [esemeny]="ticket.event" nextLabel="Esemény megtekintése"></app-eventcard>
-    </div>
-    <div class="col-sm-12 col-md-8">
+<div class="container">
+  <div class="row">
+    <ng-container *ngIf="ticket">
+      <div class="col-sm order-md-2">
+        <app-eventcard [esemeny]="ticket.event" nextLabel="Esemény megtekintése"></app-eventcard>
+      </div>
+      <div class="col-sm-12 col-md-8">
 
-      <app-ticket-detailscard [ticket]="ticket"></app-ticket-detailscard>
+        <app-ticket-detailscard [ticket]="ticket"></app-ticket-detailscard>
 
-      <app-bidding-card [ticket]="ticket"></app-bidding-card>
+        <app-bidding-card [ticket]="ticket"></app-bidding-card>
 
-    </div>
-  </ng-container>
+      </div>
+    </ng-container>
+  </div>
 </div>
+
 
