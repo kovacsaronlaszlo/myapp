@@ -58,7 +58,7 @@ export class EventDetailComponent implements OnInit, OnDestroy {
       .subscribe(
         () => this.navigateBack(),
         (err) => {
-          console.warn(`Probléma az űrlap mentésénél: ${err}`);
+          console.warn(`Probléma az űrlap törlésénél: ${err}`);
         }
       );
   }
