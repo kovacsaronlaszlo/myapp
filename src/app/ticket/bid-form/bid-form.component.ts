@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TicketModel} from "../../shared/ticket-model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {bidMinimumValidator} from "./bid.validators";
+import {BidService} from "../../shared/bid.service";
 
 @Component({
   selector: 'app-bid-form',
@@ -15,7 +16,8 @@ export class BidFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private bidService: BidService) {
   }
 
   ngOnInit(): void {
@@ -24,10 +26,10 @@ export class BidFormComponent implements OnInit {
         bid: [
           null,
           Validators.compose(
-          [
-            Validators.required,
-            bidMinimumValidator(this.ticket.currentBid + this.ticket.bidStep)
-          ]
+            [
+              Validators.required,
+              bidMinimumValidator(this.ticket.currentBid + this.ticket.bidStep)
+            ]
           )
         ]
       }
@@ -46,6 +48,20 @@ export class BidFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    if (this.form.valid) {
+      this.bidService.bid(this.ticket.id, this.form.value['bid'])
+        .subscribe(
+          () => {
+            this.submitted = false;
+            this.form.reset({bid: null});
+            // TODO notification user
+            // TODO emit output bid
+          },
+          err => {
+            console.error(err);
+          }
+        );
+    }
     console.log('licit történt');
     console.log(this.form.value);
     console.log(this.form.valid);

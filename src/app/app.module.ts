@@ -20,8 +20,9 @@ import {TicketDetailscardComponent} from './ticket/ticket-detailscard/ticket-det
 import {BiddingCardComponent} from './ticket/bidding-card/bidding-card.component';
 import {MomentModule} from "angular2-moment";
 import 'moment/locale/hu';
-import { BidFormComponent } from './ticket/bid-form/bid-form.component';
-import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.component';
+import {BidFormComponent} from './ticket/bid-form/bid-form.component';
+import {LoadingSpinnerComponent} from './core/loading-spinner/loading-spinner.component';
+import {BidService} from "./shared/bid.service";
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { LoadingSpinnerComponent } from './core/loading-spinner/loading-spinner.
     UserService,
     TicketService,
     LoggedInGuard,
+    BidService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
