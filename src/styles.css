@@ -49,6 +49,11 @@ footer {
   width:200px;
 }
 
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 
 @media (min-width:768px){
   html{
