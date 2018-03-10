@@ -9,8 +9,9 @@ import {TicketModel} from "../../shared/ticket-model";
 export class BiddingCardComponent {
   @Input() ticket: TicketModel;
   @Input() isLoggedIn: Boolean;
+  @Output() refreshTicket = new EventEmitter<void>()
 
   onBidWithBidStep() {
-    alert('asdf');
+    this.refreshTicket.emit();
   }
 }

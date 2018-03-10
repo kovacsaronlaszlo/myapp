@@ -9,7 +9,7 @@
 
           <app-ticket-detailscard [ticket]="ticket"></app-ticket-detailscard>
 
-          <app-bidding-card [isLoggedIn]="isLoggedIn" [ticket]="ticket"></app-bidding-card>
+          <app-bidding-card [isLoggedIn]="isLoggedIn" [ticket]="ticket" (refreshTicket)="onRefreshTicket()"></app-bidding-card>
 
         </div>
       </ng-container>
