@@ -15,7 +15,6 @@ import {TicketService} from "./shared/ticket.service";
 import {LoggedInGuard} from "./shared/logged-in.guard";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./shared/auth-interceptor";
 import {TicketDetailscardComponent} from './ticket/ticket-detailscard/ticket-detailscard.component';
 import {BiddingCardComponent} from './ticket/bidding-card/bidding-card.component';
 import {MomentModule} from "angular2-moment";
@@ -55,12 +54,7 @@ import {environment} from "../environments/environment";
     UserService,
     TicketService,
     LoggedInGuard,
-    BidService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    BidService
   ],
   bootstrap: [AppComponent]
 })

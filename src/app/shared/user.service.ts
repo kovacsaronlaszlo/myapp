@@ -9,16 +9,27 @@ import "rxjs/add/operator/switchMap";
 import "rxjs/add/operator/do";
 import {FirebaseRegistrationModel} from "./firebase-registration-model";
 import "rxjs/add/observable/of";
+import {ReplaySubject} from "rxjs/ReplaySubject";
+import * as firebase from 'firebase';
 
 @Injectable()
 export class UserService {
-  isLoggedin = false;
+  isLoggedin = new ReplaySubject(1);
 
   private _user = new UserModel();
   private _fbAuthData: FirebaseLoginModel | FirebaseRegistrationModel | undefined;
 
   constructor(private _router: Router,
               private _http: HttpClient) {
+    firebase.auth().onAuthStateChanged(
+      user => {
+        if (user != null) {
+          this.isLoggedin.next(true);
+        } else {
+          this.isLoggedin.next(false);
+        }
+      }
+    );
   }
 
   get fbIdToken(): string | null {
@@ -36,7 +47,6 @@ export class UserService {
       .do((fbAuthResponse: FirebaseLoginModel) => this._fbAuthData = fbAuthResponse)
       .switchMap(fbLogin => this.getUserById(fbLogin.localId))
       .do(user => this._user = user)
-      .do(user => this.isLoggedin = true)
       .do(user => console.log('Sikerült a belépés ezzel a userrel: ', user));
   }
 
@@ -57,7 +67,6 @@ export class UserService {
         };
       })
       .switchMap(user => this.save(user))
-      .do(user => this.isLoggedin = true)
       .do(user => console.log('sikeresen regisztrált ez a user: ', user));
   }
 
@@ -76,7 +85,6 @@ export class UserService {
 
   logout() {
     this._user = new UserModel();
-    this.isLoggedin = false;
     delete(this._fbAuthData);
     this._router.navigate(['/home']);
     console.log('a user kilépet');
