@@ -75,7 +75,7 @@
           </alert>
         </div>
         <div class="text-center mb-3">
-          <ng-container *ngIf="userService.isLoggedIn$">
+          <ng-container *ngIf="userService.isLoggedIn$ | async">
             <ng-container *ngIf="viewForm; else editButtons">
               <button class="btn btn-primary btn-lg"
                       type="submit"

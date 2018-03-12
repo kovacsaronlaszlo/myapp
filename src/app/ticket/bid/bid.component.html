@@ -10,7 +10,7 @@
           <app-ticket-detailscard [loading]="progressRefreshTicket" [ticket]="ticket"></app-ticket-detailscard>
 
           <app-bidding-card [loading]="progressRefreshTicket"
-                            [isLoggedIn]="isLoggedIn"
+                            [isLoggedIn]="isLoggedIn$ | async"
                             [ticket]="ticket"
                             (refreshTicket)="onRefreshTicket()">
           </app-bidding-card>
