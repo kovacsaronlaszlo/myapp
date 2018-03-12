@@ -14,7 +14,7 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class UserService {
-  isLoggedin = new ReplaySubject(1);
+  isLoggedIn$ = new ReplaySubject(1);
 
   private _user = new UserModel();
   private _fbAuthData: FirebaseLoginModel | FirebaseRegistrationModel | undefined;
@@ -24,9 +24,9 @@ export class UserService {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user != null) {
-          this.isLoggedin.next(true);
+          this.isLoggedIn$.next(true);
         } else {
-          this.isLoggedin.next(false);
+          this.isLoggedIn$.next(false);
         }
       }
     );
