@@ -6,9 +6,16 @@
 </alert>
 <div class="row" *ngIf="displayBidStep; else bidWithValue">
   <div class="col-12">
-    <button [disabled]="disabled" class="btn btn-primary text-light" (click)="onBidWithBidStep()">
-      Licit a követekző legkisebb licittel: {{ticket.currentBid+ticket.bidStep}} Ft
-    </button>
+     <div class="row">
+       <div class="col">
+         <button [disabled]="disabled" class="btn btn-primary text-light" (click)="onBidWithBidStep()">
+           Licit a követekző legkisebb licittel: {{ticket.currentBid+ticket.bidStep}} Ft
+         </button>
+       </div>
+       <div class="col" *ngIf="disabled">
+         <app-loading-spinner [loaderWidth]="30" [loaderHeight]="30"></app-loading-spinner>
+       </div>
+     </div>
   </div>
   <div class="col-12">
     <a href="#" (click)="displayBidWithStep($event)" [ngClass]="{'disabled':disabled}">Inkább megadom és a licit értékét</a>
@@ -31,7 +38,11 @@
         </div>
       </div>
       <div class="col-6">
-        <button type="submit" class="btn btn-primary text-light" role="button" [disabled]="disabled">Licitálok</button>
+        <button *ngIf="!disabled; else loadingSubmit" type="submit" class="btn btn-primary text-light" role="button" [disabled]="disabled">Licitálok</button>
+        <ng-template #loadingSubmit>
+          <app-loading-spinner [loaderWidth]="30" [loaderHeight]="30"></app-loading-spinner>
+        </ng-template>
+
       </div>
     </div>
   </form>
