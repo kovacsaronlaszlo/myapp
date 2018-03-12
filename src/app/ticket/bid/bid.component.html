@@ -7,9 +7,13 @@
         </div>
         <div class="col-sm-12 col-md-8">
 
-          <app-ticket-detailscard [ticket]="ticket"></app-ticket-detailscard>
+          <app-ticket-detailscard [loading]="progressRefreshTicket" [ticket]="ticket"></app-ticket-detailscard>
 
-          <app-bidding-card [isLoggedIn]="isLoggedIn" [ticket]="ticket" (refreshTicket)="onRefreshTicket()"></app-bidding-card>
+          <app-bidding-card [loading]="progressRefreshTicket"
+                            [isLoggedIn]="isLoggedIn"
+                            [ticket]="ticket"
+                            (refreshTicket)="onRefreshTicket()">
+          </app-bidding-card>
 
         </div>
       </ng-container>

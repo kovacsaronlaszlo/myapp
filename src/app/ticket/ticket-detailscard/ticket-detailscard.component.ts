@@ -8,4 +8,5 @@ import {TicketModel} from "../../shared/ticket-model";
 })
 export class TicketDetailscardComponent {
   @Input() ticket: TicketModel;
+  @Input() loading = false;
 }
