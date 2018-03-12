@@ -24,7 +24,9 @@
     "angular2-moment": "^1.8.0",
     "bootstrap": "^4.0.0-beta.3",
     "core-js": "^2.4.1",
+    "firebase": "^4.11.0",
     "ngx-bootstrap": "^2.0.0-rc.0",
+    "npm": "^5.7.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.19"
   },
