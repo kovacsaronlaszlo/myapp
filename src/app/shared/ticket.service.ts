@@ -61,13 +61,8 @@ export class TicketService {
           this._eventService.getEventById(ticket.eventId),
           this._userService.getUserById(ticket.sellerUserId),
           (t: TicketModel, e: EventModel, u: UserModel) => {
-            return {
-              ...t,
-              event: e,
-              seller: u
-            };
-          }
-        )
+            return t.setEvent(e).setSeller(u);
+          })
       );
   }
 
