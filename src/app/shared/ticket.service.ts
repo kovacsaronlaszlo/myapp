@@ -15,6 +15,7 @@ import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
 import * as firebase from 'firebase';
+import "rxjs/add/operator/first";
 
 @Injectable()
 export class TicketService {
@@ -46,6 +47,10 @@ export class TicketService {
       .switchMap(ticketId => this._saveGeneratedId(ticketId))
       .switchMap(ticketId => this._eventService.addTicket(param.eventId, ticketId))
       .switchMap(ticketId => this._userService.addTicket(ticketId));
+  }
+
+  getOneOnce(id:string):Observable<TicketModel> {
+    return this.getOne(id).first();
   }
 
   getOne(id: string): Observable<TicketModel> {
