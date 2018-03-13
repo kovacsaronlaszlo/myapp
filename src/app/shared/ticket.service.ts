@@ -14,6 +14,7 @@ import "rxjs/add/observable/combineLatest";
 import "rxjs/add/observable/forkJoin";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
+import * as firebase from 'firebase';
 
 @Injectable()
 export class TicketService {
@@ -51,21 +52,23 @@ export class TicketService {
     return new Observable(
       observer => {
         const dbTicket = firebase.database().ref(`tickets/${id}`);
-        dbTicket.on('value', snapshot => {
-          const ticket = snapshot.val();
+        dbTicket.on('value',
+          snapshot => {
+            const ticket = snapshot.val();
 
-          const subscription = Observable.combineLatest(
-            Observable.of(new TicketModel(ticket)),
-            this._eventService.getEventById(ticket.eventId),
-            this._userService.getUserById(ticket.sellerUserId),
-            (t: TicketModel, e: EventModel, u: UserModel) => {
-              return t.setEvent(e).setSeller(u);
-            }).subscribe(
-            ticketModel => {
-              observer.next(ticketModel);
-              subscription.unsubscribe();
-            });
-        });
+            const subscription = Observable.combineLatest(
+              Observable.of(new TicketModel(ticket)),
+              this._eventService.getEventById(ticket.eventId),
+              this._userService.getUserById(ticket.sellerUserId),
+              (t: TicketModel, e: EventModel, u: UserModel) => {
+                return t.setEvent(e).setSeller(u);
+              }).subscribe(
+              ticketModel => {
+                observer.next(ticketModel);
+                subscription.unsubscribe();
+              }
+            );
+          });
       }
     );
   }
