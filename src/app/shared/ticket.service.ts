@@ -30,7 +30,7 @@ export class TicketService {
       .map(ticketsObject => Object.values(ticketsObject))
       .map(ticketsArray => ticketsArray.map(tm =>
         Observable.zip(
-          Observable.of(tm),
+          Observable.of(new TicketModel(tm)),
           this._eventService.getEventById(tm.eventId),
           this._userService.getUserById(tm.sellerUserId),
           (t: TicketModel, e: EventModel, u: UserModel) => {
