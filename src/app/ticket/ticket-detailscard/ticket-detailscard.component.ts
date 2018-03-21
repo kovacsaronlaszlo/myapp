@@ -18,7 +18,7 @@ export class TicketDetailscardComponent implements AfterViewInit, OnChanges {
     if(changes['loading'] != null
       && changes['loading'].currentValue !== changes['loading'].previousValue) {
       this.cdr.detectChanges();
-    } else if(changers['ticket'] != null
+    } else if(changes['ticket'] != null
       && !changes['ticket'].isFirstChange()) {
       const prev: TicketModel = changes['ticket'].previousValue;
       const current: TicketModel = changes['ticket'].currentValue;
