@@ -1,4 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
+  SimpleChanges
+} from '@angular/core';
 import {TicketModel} from "../../shared/ticket-model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {bidMinimumValidator} from "./bid.validators";
@@ -7,7 +10,8 @@ import {BidService} from "../../shared/bid.service";
 @Component({
   selector: 'app-bid-form',
   templateUrl: './bid-form.component.html',
-  styleUrls: ['./bid-form.component.css']
+  styleUrls: ['./bid-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BidFormComponent implements OnInit, OnChanges {
   @Input() ticket: TicketModel;
