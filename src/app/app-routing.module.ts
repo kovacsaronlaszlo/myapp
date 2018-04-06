@@ -33,7 +33,7 @@ const routes: Routes = [
       {path: ':id', component: BidComponent}
     ]
   },
-  {path: 'about', component: AboutComponent},
+  {path: '', loadChildren: 'app/about/about.module#AboutModule'},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -49,7 +49,6 @@ export class AppRoutingModule {
     TicketListComponent,
     TicketDetailComponent,
     BidComponent,
-    AboutComponent,
     LoginComponent,
     ProfileComponent,
     ProfileEditComponent,
