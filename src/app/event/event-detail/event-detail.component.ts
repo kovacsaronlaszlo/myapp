@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EventModel} from "../../shared/event-model";
 import {ActivatedRoute} from "@angular/router";
-import {EventService} from "../../shared/event.service";
+import {EventService} from "../event.service";
 import {Location} from "@angular/common";
 import {UserService} from "../../shared/user.service";
 import {Subject} from "rxjs/Subject";

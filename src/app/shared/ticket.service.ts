@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EventService} from './event.service';
+import {EventService} from '../event/event.service';
 import {TicketModel} from './ticket-model';
 import {UserService} from './user.service';
 import {HttpClient} from "@angular/common/http";

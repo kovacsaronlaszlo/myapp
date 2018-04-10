@@ -1,6 +1,6 @@
 ///<reference path="../../../../node_modules/@angular/core/src/metadata/di.d.ts"/>
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {EventService} from "../../shared/event.service";
+import {EventService} from "../event.service";
 import {EventModel} from "../../shared/event-model";
 import {UserService} from "../../shared/user.service";
 import {Observable} from "rxjs/Observable";

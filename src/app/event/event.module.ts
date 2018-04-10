@@ -9,6 +9,8 @@ import {FormsModule} from "@angular/forms";
 import {AlertModule} from "ngx-bootstrap";
 import {EventcardModule} from "./eventcard/eventcard.module";
 import {CoreModule} from "../core/core.module";
+import {ModuleWithProviders} from "@angular/compiler/src/core";
+import {EventService} from "./event.service";
 
 @NgModule({
   imports: [
@@ -27,4 +29,10 @@ import {CoreModule} from "../core/core.module";
   ]
 })
 export class EventModule {
+  static forRoot(): ModuleWithProvidersreturn {
+    return {
+      ngModule: EventModule,
+      providers: [EventService]
+    };
+  }
 }
