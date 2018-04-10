@@ -5,7 +5,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AlertModule, CollapseModule} from "ngx-bootstrap";
 import {AppRoutingModule} from "./app-routing.module";
-import {EventService} from "./event/event.service";
 import {UserService} from "./shared/user.service";
 import {TicketService} from "./shared/ticket.service";
 import {LoggedInGuard} from "./shared/logged-in.guard";
