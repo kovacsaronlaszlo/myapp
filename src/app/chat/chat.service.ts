@@ -14,7 +14,7 @@ export class ChatService {
       return null;
     }
 
-    getRoomMessages(roomId: string): Observable<ChatMessageModel> {
+    getRoomMessages(roomId: string): Observable<ChatMessageModel[]> {
       return null;
     }
 }

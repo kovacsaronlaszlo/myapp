@@ -19,13 +19,13 @@ export class MockedChatService extends ChatService {
 
   addMessage(roomId: string, msg: string): Observable<boolean> {
     const rooms = this.rooms$.getValue();
-    const roomMessage = rooms[roomId].getValue();
+    const roomMessages = rooms[roomId].getValue();
 
     return this.userService.getCurrentUser()
       .delay(300)
       .switchMap(
         user => {
-          roomMessage.push(
+          roomMessages.push(
             new ChatMessageModel({
               $id: null,
               'msg': msg,
@@ -34,7 +34,7 @@ export class MockedChatService extends ChatService {
               userPictureUrl: user.profilePictureUrl
             })
           );
-          rooms[roomId].next(roomMessage);
+          rooms[roomId].next(roomMessages);
 
           return Observable.of(true);
         }
@@ -42,13 +42,13 @@ export class MockedChatService extends ChatService {
 
   }
 
-  getRoomMessages(roomId: string): Observable<ChatMessageModel> {
+  getRoomMessages(roomId: string): Observable<ChatMessageModel[]> {
     const rooms = this.rooms$.getValue();
     if (rooms[roomId] == null) {
       // first init room
       rooms[roomId] = new BehaviorSubject<ChatMessageModel[]>([]);
       this.rooms$.next(rooms);
     }
-    return rooms[roomdId].asObservable();
+    return rooms[roomId].asObservable();
   }
 }
