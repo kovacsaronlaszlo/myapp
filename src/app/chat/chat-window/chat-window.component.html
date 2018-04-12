@@ -4,6 +4,31 @@
   </div>
   <div class="card-body">
     <ul class="chat-messages-list">
+
+      <li class="left clearfix">
+        <span class="float-left">
+          <img src="assets/user.svg" alt="felhasznalo kepe" class="user-image rounded-circle" />
+        </span>
+        <div class="clearfix chat-message">
+          <div class="chat-massage-header">
+            <strong>USER</strong>
+            <small class="float-right text-muted">x idővel ezelőtt</small>
+          </div>
+          <p>
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+            Lorem ipsum...........
+
+          </p>
+        </div>
+      </li>
+
       <li class="left clearfix">
         <span class="float-left">
           <img src="assets/user.svg" alt="felhasznalo kepe" class="user-image rounded-circle" />
@@ -26,9 +51,20 @@
           </p>
         </div>
       </li>
+
     </ul>
   </div>
   <div class="card-footer">
-    footer
+    <form class="input-group" [formGroup]="form" (ngSubmit)="sendMessage()">
+      <input type="text"
+             name="chat-message"
+             formControlName="chat-message"
+             class="form-control"
+             placeholder="Üzenet..."
+             [ngClass]="{'is-invalid':invalidChatMessageInput}" #chatMessageInput/>
+      <span class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit">Küldés</button>
+      </span>
+    </form>
   </div>
 </div>
