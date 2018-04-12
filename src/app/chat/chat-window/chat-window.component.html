@@ -3,56 +3,25 @@
     Chat
   </div>
   <div class="card-body">
-    <ul class="chat-messages-list">
 
-      <li class="left clearfix">
-        <span class="float-left">
-          <img src="assets/user.svg" alt="felhasznalo kepe" class="user-image rounded-circle" />
-        </span>
-        <div class="clearfix chat-message">
-          <div class="chat-massage-header">
-            <strong>USER</strong>
-            <small class="float-right text-muted">x idővel ezelőtt</small>
-          </div>
-          <p>
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
 
-          </p>
-        </div>
-      </li>
+    <ng-container *ngIf="chatMessage$ | async as chatMessages; else loadingChat">
+      <ng-container *ngIf="chatMessages.length > 0; else notFoundMessage">
 
-      <li class="left clearfix">
-        <span class="float-left">
-          <img src="assets/user.svg" alt="felhasznalo kepe" class="user-image rounded-circle" />
-        </span>
-        <div class="clearfix chat-message">
-          <div class="chat-massage-header">
-            <strong>USER</strong>
-            <small class="float-right text-muted">x idővel ezelőtt</small>
-          </div>
-          <p>
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-            Lorem ipsum...........
-          </p>
-        </div>
-      </li>
+        <ul class="chat-messages-list">
+          <app-chat-message-row [msg]="msg" *ngFor="let msg of chatMessages"></app-chat-message-row>
+        </ul>
 
-    </ul>
+      </ng-container>
+      <ng-template #notFoundMessage>
+        <strong class="text-muted">Nincs még üzenet</strong>
+      </ng-template>
+    </ng-container>
+    <ng-template #loadingChat>
+      <app-loading-spinner [loaderWidth]="100" [loaderHeight]="100"></app-loading-spinner>
+    </ng-template>
+
+
   </div>
   <div class="card-footer">
     <form class="input-group" [formGroup]="form" (ngSubmit)="sendMessage()">
