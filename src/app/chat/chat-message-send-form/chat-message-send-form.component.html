@@ -6,6 +6,6 @@
          placeholder="Üzenet..."
          [ngClass]="{'is-invalid':invalidChatMessageInput}" #chatMessageInput/>
   <span class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit">Küldés</button>
+    <button class="btn btn-primary" type="submit" [disabled]="disabled">Küldés</button>
   </span>
 </form>

@@ -1,6 +1,14 @@
 ///<reference path="../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {
-  Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -10,7 +18,8 @@ import "rxjs/add/operator/skip";
 @Component({
   selector: 'app-chat-message-send-form',
   templateUrl: './chat-message-send-form.component.html',
-  styleUrls: ['./chat-message-send-form.component.css']
+  styleUrls: ['./chat-message-send-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatMessageSendFormComponent implements OnInit, OnChanges {
   form: FormGroup;
@@ -23,10 +32,26 @@ export class ChatMessageSendFormComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder) {
   }
 
+  private _disabled = false;
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
+
+  set disabled(value: boolean) {
+    this._disabled = value;
+    if(value === true) {
+      this.form.get('chat-message').disable();
+    } else {
+      this.form.get('chat.message').enable();
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['reset'] != null
+    if (changes['reset'] != null
       && changes['reset'].isFirstChange() === false
       && changes['reset'].currentValue === true) {
+      this.disabled = false;
       this.form.reset({'chat-message': null});
       this.chatMessageInput.nativeElement.focus();
     }
@@ -55,6 +80,7 @@ export class ChatMessageSendFormComponent implements OnInit, OnChanges {
       this.invalidChatMessageInput = true;
       this.chatMessageInput.nativeElement.focus();
     } else {
+      this.disabled = true;
       this.resetChange.emit(false);
       this.newMessage.emit(this.form.value['chat-message']);
     }
