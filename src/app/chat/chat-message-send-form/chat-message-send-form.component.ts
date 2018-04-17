@@ -43,7 +43,7 @@ export class ChatMessageSendFormComponent implements OnInit, OnChanges {
     if(value === true) {
       this.form.get('chat-message').disable();
     } else {
-      this.form.get('chat.message').enable();
+      this.form.get('chat-message').enable();
     }
   }
 
