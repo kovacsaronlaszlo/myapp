@@ -24,16 +24,6 @@
 
   </div>
   <div class="card-footer">
-    <form class="input-group" [formGroup]="form" (ngSubmit)="sendMessage()">
-      <input type="text"
-             name="chat-message"
-             formControlName="chat-message"
-             class="form-control"
-             placeholder="Üzenet..."
-             [ngClass]="{'is-invalid':invalidChatMessageInput}" #chatMessageInput/>
-      <span class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Küldés</button>
-      </span>
-    </form>
+    <app-chat-message-send-form [(reset)]="resetForm" (newMessage)="inNewMessage($event)" ></app-chat-message-send-form>
   </div>
 </div>

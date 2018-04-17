@@ -1,5 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, Input, OnInit} from '@angular/core';
 import "rxjs/add/operator/skip";
 import "rxjs/add/operator/distinctUntilChanged";
 import {environment} from "../../../environments/environment";
@@ -15,53 +14,26 @@ import {ChatService} from "../chat.service";
 })
 export class ChatWindowComponent implements OnInit {
   @Input() roomId = environment.production ? null : MockedChatDatas.mockedRoomId;
-  form: FormGroup;
-  invalidChatMessageInput = false;
-  @ViewChild('chatMessageInput') chatMessageInput: ElementRef;
+  resetForm = false;
   chatMessage$: Observable<ChatMessageModel[]>;
 
-  constructor(private fb: FormBuilder,
-              private chatService: ChatService) {
+  constructor(private chatService: ChatService) {
   }
 
   ngOnInit() {
     this.chatMessage$ = this.chatService.getRoomMessages(this.roomId);
-    this.form = this.fb.group({
-      'chat-message': [null, Validators.required]
-    });
+  }
 
-    this.form.get('chat-message')
-      .valueChanges
-      .distinctUntilChanged(
-        msg => {
-          return !(msg.length > 0 && this.invalidChatMessageInput);
-        }
-      )
-      .skip(1)
+  inNewMessage(newMessage: string) {
+    this.chatService.addMessage(this.roomId, newMessage)
       .subscribe(
-        msg => this.invalidChatMessageInput = false
+        resp => {
+          if (resp) {
+            this.resetForm = true;
+          } else {
+            alert("Hiba az üzenetküldés közben");
+          }
+        }
       );
   }
-
-  sendMessage() {
-    if (this.form.invalid) {
-      this.invalidChatMessageInput = true;
-      this.chatMessageInput.nativeElement.focus();
-    } else {
-      this.chatService.addMessage(this.roomId, this.form.value['chat-message'])
-        .subscribe(
-          resp => {
-            if(resp) {
-              this.form.reset({'chat-message':null});
-              this.chatMessageInput.nativeElement.focus();
-            } else {
-              alert("Hiba az üzenetküldés közben");
-            }
-          }
-        )
-    }
-
-
-  }
-
 }

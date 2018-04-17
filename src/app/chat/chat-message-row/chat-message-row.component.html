@@ -11,7 +11,7 @@
   <div class="clearfix chat-message">
     <div class="chat-massage-header">
       <strong>{{msg.userName}}</strong>
-      <small class="float-right text-muted">x idővel ezelőtt</small>
+      <small class="float-right text-muted">{{msg.created | amFromUnix | amTimeAgo}}</small>
     </div>
     <p>
       {{msg.msg}}

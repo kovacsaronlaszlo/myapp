@@ -27,8 +27,8 @@ export class ChatMessageSendFormComponent implements OnInit, OnChanges {
     if(changes['reset'] != null
       && changes['reset'].isFirstChange() === false
       && changes['reset'].currentValue === true) {
-        this.form.reset({'chat-message': null});
-        this.chatMessageInput.nativeElement.focus();
+      this.form.reset({'chat-message': null});
+      this.chatMessageInput.nativeElement.focus();
     }
   }
 

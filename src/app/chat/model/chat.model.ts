@@ -6,6 +6,7 @@ export class ChatMessageModel {
   userId: string;
   userName: string;
   userPictureUrl: string;
+  created: number;
 
   constructor(data?: ChatMessageModel) {
     if(data != null) {
